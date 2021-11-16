@@ -7,3 +7,8 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
+
+mix-manifest.json
+
+/assets/dist/
+/vendor/
