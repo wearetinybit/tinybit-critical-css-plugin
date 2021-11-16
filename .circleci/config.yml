@@ -3,7 +3,6 @@ workflows:
   main:
     jobs:
       - lint
-      - test-js
       - test-php
 
 version: 2
@@ -22,18 +21,10 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache:
-          keys:
-            - node-v1-{{ checksum "package-lock.json" }}
-      - run: npm install
-      - save_cache:
-          key: node-v1-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
       - run:
           name: "Run Lint"
           command: |
-            npm run lint
+            composer phpcs
   test-php:
     docker:
       - image: circleci/php:7.2-node-browsers
@@ -81,23 +72,3 @@ jobs:
             rm -rf $WP_TESTS_DIR $WP_CORE_DIR
             bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 4.4 true
             composer phpunit
-  test-js:
-    docker:
-      - image: circleci/php:7.2-node-browsers
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node-v1-{{ checksum "package-lock.json" }}
-      - run:
-          name: "Install JavaScript Dependencies"
-          command: |
-            npm install
-      - save_cache:
-          key: node-v1-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: "Run JS Tests"
-          command: |
-            npm run test
