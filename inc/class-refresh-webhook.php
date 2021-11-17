@@ -71,11 +71,7 @@ class Refresh_Webhook {
 	 * @param string $url URL to generate critical CSS for.
 	 */
 	public static function handle_tinybit_generate_critical_css( $url ) {
-		if ( ! defined( 'WP_CLI' ) ) {
-			return;
-		}
-		\WP_CLI::set_url( $url );
-		\WP_CLI::run_command( [ 'tinybit-critical-css', 'generate' ], [ 'url' => $url ] );
+		Core::generate( $url );
 	}
 
 }
