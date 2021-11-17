@@ -103,6 +103,15 @@ class CLI {
 	}
 
 	/**
+	 * Generates a webhook that can be used for triggering a refresh.
+	 *
+	 * @subcommand refresh-webhook
+	 */
+	public function refresh_webhook() {
+		WP_CLI::log( sprintf( home_url( Refresh_Webhook::get_path() ) ) );
+	}
+
+	/**
 	 * Runs through the entirety of the WP bootstrap process
 	 */
 	private static function load_wordpress_with_template() {

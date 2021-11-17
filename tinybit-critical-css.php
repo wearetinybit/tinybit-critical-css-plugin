@@ -45,6 +45,22 @@ add_filter(
 	2
 );
 
+add_action(
+	'template_redirect',
+	array(
+		'TinyBit_Critical_Css\Refresh_Webhook',
+		'action_template_redirect',
+	)
+);
+
+add_action(
+	'tinybit_generate_critical_css',
+	array(
+		'TinyBit_Critical_Css\Refresh_Webhook',
+		'handle_tinybit_generate_critical_css',
+	)
+);
+
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'tinybit-critical-css', 'TinyBit_Critical_Css\CLI' );
 }
