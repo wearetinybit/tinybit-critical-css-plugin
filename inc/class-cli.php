@@ -43,7 +43,7 @@ class CLI {
 		}
 
 		$config = null;
-		$url    = $assoc_args['url'];
+		$url    = isset( $assoc_args['url'] ) ? $assoc_args['url'] : WP_CLI::get_config( 'url' );
 		foreach ( apply_filters( 'tinybit_critical_css_pages', [] ) as $page ) {
 			if ( $url === $page['url'] ) {
 				$config = $page;
