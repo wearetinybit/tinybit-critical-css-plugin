@@ -68,7 +68,7 @@ class CLI {
 						'html' => $output,
 					)
 				),
-				'timeout' => 20,
+				'timeout' => 60,
 			)
 		);
 		$code     = wp_remote_retrieve_response_code( $response );
