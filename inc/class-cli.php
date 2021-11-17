@@ -55,7 +55,7 @@ class CLI {
 
 		$css = file_get_contents( $config['source'] );
 
-		WP_CLI::log( sprintf( 'Posting WordPress output and stylesheet to %s.', TINYBIT_CRITICAL_CSS_SERVER ) );
+		WP_CLI::log( sprintf( 'Posting WordPress output and stylesheet to %s', TINYBIT_CRITICAL_CSS_SERVER ) );
 		$response = wp_remote_post(
 			TINYBIT_CRITICAL_CSS_SERVER,
 			array(
