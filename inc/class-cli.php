@@ -87,6 +87,19 @@ class CLI {
 	}
 
 	/**
+	 * Clears all critical CSS files.
+	 */
+	public function clear() {
+		foreach ( apply_filters( 'tinybit_critical_css_pages', [] ) as $page ) {
+			if ( file_exists( $page['critical'] ) ) {
+				unlink( $page['critical'] );
+				WP_CLI::log( sprintf( 'Deleted critical css at %s', str_replace( ABSPATH, '', $page['critical'] ) ) );
+			}
+		}
+		WP_CLI::success( 'Cleared critical CSS' );
+	}
+
+	/**
 	 * Runs through the entirety of the WP bootstrap process
 	 */
 	private static function load_wordpress_with_template() {
