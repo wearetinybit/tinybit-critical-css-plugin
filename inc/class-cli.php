@@ -84,7 +84,7 @@ class CLI {
 				WP_CLI::error( 'Critical CSS response is unexpectedly empty' );
 			}
 		} else {
-			WP_CLI::error( sprintf( 'Unexpected response from critical CSS server (HTTP %d)', $code ) );
+			WP_CLI::error( sprintf( 'Unexpected response from critical CSS server: %s (HTTP %d)', trim( wp_remote_retrieve_body( $response ) ), $code ) );
 		}
 		WP_CLI::success( 'Generated critical CSS' );
 	}
