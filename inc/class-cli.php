@@ -69,7 +69,9 @@ class CLI {
 
 		$css = file_get_contents( $config['source'] );
 
-		WP_CLI::log( sprintf( 'Posting WordPress output and stylesheet to %s', TINYBIT_CRITICAL_CSS_SERVER ) );
+		$output_size     = round( ( strlen( $output ) / 1000 ), 2 );
+		$stylesheet_size = round( ( strlen( $css ) / 1000 ), 2 );
+		WP_CLI::log( sprintf( 'Posting WordPress output (%skb) and stylesheet (%skb) to %s', $output_size, $stylesheet_size, TINYBIT_CRITICAL_CSS_SERVER ) );
 		$response = wp_remote_post(
 			TINYBIT_CRITICAL_CSS_SERVER,
 			array(
@@ -93,7 +95,8 @@ class CLI {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( ! empty( $body['css'] ) ) {
 				file_put_contents( $config['critical'], $body['css'] );
-				WP_CLI::log( sprintf( 'Saved critical css to %s', str_replace( ABSPATH, '', $config['critical'] ) ) );
+				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
+				WP_CLI::log( sprintf( 'Saved critical css (%skb) to %s', $critical_size, str_replace( ABSPATH, '', $config['critical'] ) ) );
 			} else {
 				WP_CLI::error( 'Critical CSS response is unexpectedly empty' );
 			}
