@@ -1,0 +1,25 @@
+# Files to ignore in DeployHQ deploys.
+.babelrc
+.editorconfig
+.gitignore
+.travis.yml
+.npmrc
+auth.json
+composer.json
+composer.lock
+dependencies.yml
+jest.setup.js
+phpcs.xml.dist
+phpunit.xml.dist
+package.json
+package-lock.json
+postcss.config.js
+webpack.config.js
+tailwind.js
+README.md
+bin/**
+.circleci/**
+.vscode/**
+node_modules/**
+php-tests/**
+
