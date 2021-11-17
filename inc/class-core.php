@@ -29,6 +29,13 @@ class Core {
 	private static $rendered_footer;
 
 	/**
+	 * Records log messages.
+	 *
+	 * @var string
+	 */
+	private static $log_messages = '';
+
+	/**
 	 * Generates the critical CSS for a given URL.
 	 *
 	 * @param string $url URL to generate critical CSS for.
@@ -156,6 +163,23 @@ class Core {
 		if ( class_exists( 'WP_CLI' ) ) {
 			\WP_CLI::log( $message );
 		}
+		self::$log_messages .= PHP_EOL . $message;
+	}
+
+	/**
+	 * Gets all log messages.
+	 *
+	 * @return string
+	 */
+	public static function get_log_messages() {
+		return trim( self::$log_messages );
+	}
+
+	/**
+	 * Clears all log messages.
+	 */
+	public static function clear_log_messages() {
+		self::$log_messages = '';
 	}
 
 	/**
