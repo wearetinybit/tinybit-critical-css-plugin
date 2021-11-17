@@ -72,6 +72,9 @@ class CLI {
 			)
 		);
 		$code     = wp_remote_retrieve_response_code( $response );
+		if ( is_wp_error( $code ) ) {
+			WP_CLI::error( $code );
+		}
 		if ( 200 === $code ) {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( ! empty( $body['css'] ) ) {
