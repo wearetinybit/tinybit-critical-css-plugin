@@ -74,12 +74,8 @@ class Refresh_Webhook {
 		if ( ! defined( 'WP_CLI' ) ) {
 			return;
 		}
-		\WP_CLI::runcommand(
-			sprintf( 'tinybit-critical-css generate --url=%s', $url ),
-			[
-				'launch' => true,
-			]
-		);
+		\WP_CLI::set_url( $url );
+		\WP_CLI::run_command( [ 'tinybit-critical-css', 'generate' ], [ 'url' => $url ] );
 	}
 
 }
