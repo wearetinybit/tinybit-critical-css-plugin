@@ -166,7 +166,9 @@ class Core {
 		// Set up main_query main WordPress query.
 		wp();
 
-		define( 'WP_USE_THEMES', true );
+		if ( ! defined( 'WP_USE_THEMES' ) ) {
+			define( 'WP_USE_THEMES', true );
+		}
 
 		return self::get_rendered_template();
 	}
