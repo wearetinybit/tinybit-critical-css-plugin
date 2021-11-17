@@ -86,8 +86,8 @@ class CLI {
 			)
 		);
 		$code     = wp_remote_retrieve_response_code( $response );
-		if ( is_wp_error( $code ) ) {
-			WP_CLI::error( $code );
+		if ( is_wp_error( $response ) ) {
+			WP_CLI::error( $response );
 		}
 		if ( 200 === $code ) {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
