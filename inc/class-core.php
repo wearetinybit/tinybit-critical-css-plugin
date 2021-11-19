@@ -136,7 +136,7 @@ class Core {
 						'html' => $output,
 					)
 				),
-				'timeout' => 60,
+				'timeout' => 90,
 			)
 		);
 		$code     = wp_remote_retrieve_response_code( $response );
