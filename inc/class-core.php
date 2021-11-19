@@ -29,6 +29,13 @@ class Core {
 	private static $rendered_footer;
 
 	/**
+	 * Start time
+	 *
+	 * @var integer
+	 */
+	private static $start_time;
+
+	/**
 	 * Records log messages.
 	 *
 	 * @var string
@@ -42,6 +49,9 @@ class Core {
 	 * @return mixed
 	 */
 	public static function generate( $url ) {
+
+		self::$start_time = microtime( true );
+
 		if ( ! defined( 'TINYBIT_CRITICAL_CSS_SERVER' ) ) {
 			return new WP_Error(
 				'missing-constant',
@@ -105,7 +115,7 @@ class Core {
 			}
 		}
 
-		self::log( sprintf( 'Rendering WordPress output for %s', $url ) );
+		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 
 		$output = self::load_wordpress_with_template();
 
@@ -113,7 +123,7 @@ class Core {
 
 		$output_size     = round( ( strlen( $output ) / 1000 ), 2 );
 		$stylesheet_size = round( ( strlen( $css ) / 1000 ), 2 );
-		self::log( sprintf( 'Posting WordPress output (%skb) and stylesheet (%skb) to %s', $output_size, $stylesheet_size, TINYBIT_CRITICAL_CSS_SERVER ) );
+		self::log( sprintf( 'Posting WordPress output (%skb) and stylesheet (%skb) to %s [%s]', $output_size, $stylesheet_size, TINYBIT_CRITICAL_CSS_SERVER, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 		$response = wp_remote_post(
 			TINYBIT_CRITICAL_CSS_SERVER,
 			array(
@@ -138,17 +148,17 @@ class Core {
 			if ( ! empty( $body['css'] ) ) {
 				file_put_contents( $config['critical'], $body['css'] );
 				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
-				self::log( sprintf( 'Saved critical css (%skb) to %s', $critical_size, str_replace( ABSPATH, '', $config['critical'] ) ) );
+				self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 			} else {
 				return new WP_Error(
 					'empty-response',
-					'Critical CSS response is unexpectedly empty'
+					sprintf( 'Critical CSS response is unexpectedly empty [%s]', self::format_timestamp( microtime( true ) - self::$start_time ) )
 				);
 			}
 		} else {
 			return new WP_Error(
 				'unexpected-response',
-				sprintf( 'Unexpected response from critical CSS server: %s (HTTP %d)', trim( wp_remote_retrieve_body( $response ) ), $code )
+				sprintf( 'Unexpected response from critical CSS server: %s (HTTP %d) [%s]', trim( wp_remote_retrieve_body( $response ) ), $code, self::format_timestamp( microtime( true ) - self::$start_time ) )
 			);
 		}
 		return true;
@@ -286,6 +296,16 @@ class Core {
 		// phpcs:enable WordPress.CodeAnalysis.AssignmentInCondition.Found
 
 		return;
+	}
+
+	/**
+	 * Formats seconds into H:i:s
+	 *
+	 * @param integer $seconds Time in seconds.
+	 * @return string
+	 */
+	protected static function format_timestamp( $seconds ) {
+		return floor( $seconds / 3600 ) . gmdate( ':i:s', $seconds % 3600 );
 	}
 
 }
