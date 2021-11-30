@@ -19,7 +19,9 @@ tailwind.js
 README.md
 bin/**
 .circleci/**
+.github/**
 .vscode/**
 node_modules/**
+tests/**
 php-tests/**
 
