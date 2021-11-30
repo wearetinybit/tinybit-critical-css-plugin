@@ -86,13 +86,7 @@ class Core {
 		$_SERVER['SERVER_PORT']  = $get_flag_value( $url_parts, 'port', '80' );
 		$_SERVER['QUERY_STRING'] = $f( 'query' );
 
-		$config = null;
-		foreach ( apply_filters( 'tinybit_critical_css_pages', [] ) as $page ) {
-			if ( $url === $page['url'] ) {
-				$config = $page;
-				break;
-			}
-		}
+		$config = self::get_page_config_for_url( $url );
 		if ( ! $config ) {
 			return new WP_Error(
 				'missing-config',
@@ -162,6 +156,39 @@ class Core {
 			);
 		}
 		return true;
+	}
+
+	/**
+	 * Gets the critical CSS page configs.
+	 *
+	 * @return array
+	 */
+	public static function get_page_configs() {
+		$configs = apply_filters( 'tinybit_critical_css_pages', [] );
+		$new     = [];
+		foreach ( $configs as $config_url => $config ) {
+			if ( ! wp_parse_url( $config_url, PHP_URL_HOST ) ) {
+				$config_url = home_url( $config_url );
+			}
+			$new[ $config_url ] = $config;
+		}
+		return $new;
+	}
+
+	/**
+	 * Gets the critical CSS page config for a given URL.
+	 *
+	 * @param string $url URL to match.
+	 * @return array
+	 */
+	public static function get_page_config_for_url( $url ) {
+		$configs = self::get_page_configs();
+		foreach ( $configs as $config_url => $config ) {
+			if ( $url === $config_url ) {
+				return $config;
+			}
+		}
+		return false;
 	}
 
 	/**

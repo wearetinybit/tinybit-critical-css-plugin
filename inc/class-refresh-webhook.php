@@ -45,10 +45,10 @@ class Refresh_Webhook {
 			return;
 		}
 		$count = 0;
-		$pages = apply_filters( 'tinybit_critical_css_pages', [] );
-		foreach ( $pages as $page ) {
+		$pages = Core::get_page_configs();
+		foreach ( $pages as $url => $config ) {
 			$event = 'tinybit_generate_critical_css';
-			$args  = [ 'url' => $page['url'] ];
+			$args  = [ 'url' => $url ];
 			if ( wp_next_scheduled( $event, $args ) ) {
 				continue;
 			}

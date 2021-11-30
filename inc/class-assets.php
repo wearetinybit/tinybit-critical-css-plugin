@@ -21,7 +21,7 @@ class Assets {
 	public static function filter_style_loader_tag( $tag, $handle ) {
 
 		$config = null;
-		foreach ( apply_filters( 'tinybit_critical_css_pages', [] ) as $page ) {
+		foreach ( Core::get_page_configs() as $page ) {
 			if ( empty( $page['when'] ) || ! is_callable( $page['when'] ) ) {
 				continue;
 			}

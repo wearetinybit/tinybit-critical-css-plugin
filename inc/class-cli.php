@@ -36,7 +36,7 @@ class CLI {
 	 * Clears all critical CSS files.
 	 */
 	public function clear() {
-		foreach ( apply_filters( 'tinybit_critical_css_pages', [] ) as $page ) {
+		foreach ( Core::get_page_configs() as $page ) {
 			if ( file_exists( $page['critical'] ) ) {
 				unlink( $page['critical'] );
 				WP_CLI::log( sprintf( 'Deleted critical css at %s', str_replace( ABSPATH, '', $page['critical'] ) ) );
