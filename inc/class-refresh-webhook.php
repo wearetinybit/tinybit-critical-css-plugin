@@ -71,8 +71,9 @@ class Refresh_Webhook {
 	 * @param string $url URL to generate critical CSS for.
 	 */
 	public static function handle_tinybit_generate_critical_css( $url ) {
-		$ret = Core::generate( $url );
-		if ( defined( 'TINYBIT_CRITICAL_CSS_CRON_EMAIL' ) && TINYBIT_CRITICAL_CSS_CRON_EMAIL ) {
+		$ret   = Core::generate( $url );
+		$email = apply_filters( 'tinybit_critical_css_cron_email', '', $ret );
+		if ( $email ) {
 			$timestamp = gmdate( 'Y-m-d H:i:s' );
 			$base      = is_wp_error( $ret ) ? 'Error generating critical CSS for %s [%s]' : 'Successfully generated critical css for %s [%s]';
 			$subject   = sprintf( $base, $url, $timestamp );
@@ -82,7 +83,7 @@ class Refresh_Webhook {
 				$body = Core::get_log_messages();
 			}
 			wp_mail(
-				TINYBIT_CRITICAL_CSS_CRON_EMAIL,
+				$email,
 				$subject,
 				$body
 			);
