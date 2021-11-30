@@ -143,6 +143,12 @@ class Core {
 				file_put_contents( $config['critical'], $body['css'] );
 				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
 				self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
+				if ( $critical_size >= 14 ) {
+					return new WP_Error(
+						'size-exceeded',
+						sprintf( 'Critical CSS size exceeds 14kb (actual %skb)', $critical_size )
+					);
+				}
 			} else {
 				return new WP_Error(
 					'empty-response',
