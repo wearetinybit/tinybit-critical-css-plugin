@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:     Tinybit Critical Css
+ * Plugin Name:     TinyBit Critical CSS
  * Plugin URI:      PLUGIN SITE HERE
  * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Author:          TinyBit
+ * Author URI:      https://tinybit.com
  * Text Domain:     tinybit-critical-css
  * Domain Path:     /languages
  * Version:         0.1.0

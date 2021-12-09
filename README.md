@@ -1,16 +1,16 @@
-=== TinyBit Critical CSS ===
-Contributors: danielbachhuber
-Tags: performance
-Requires at least: 4.5
-Tested up to: 5.8.2
-Requires PHP: 5.6
-Stable tag: 0.1.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+# TinyBit Critical CSS #
+**Contributors:** [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/)  
+**Tags:** performance  
+**Requires at least:** 4.5  
+**Tested up to:** 5.8.2  
+**Requires PHP:** 5.6  
+**Stable tag:** 0.1.0  
+**License:** GPLv2 or later  
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
 Generates and serves inline critical CSS.
 
-== Description ==
+## Description ##
 
 The TinyBit Critical CSS plugin works with [tinybit-critical-css-server](https://github.com/pinchofyum/tinybit-critical-css-server) to generate and serve inline critical CSS.
 
@@ -23,7 +23,7 @@ Here's how the plugin works:
 
 Et voila! You have inline critical CSS.
 
-== Installation ==
+## Installation ##
 
 First, you'll need to make sure you have a working installation of [tinybit-critical-css-server](https://github.com/pinchofyum/tinybit-critical-css-server). Do that first if you haven't already.
 
@@ -70,8 +70,8 @@ wp tinybit-critical-css generate --url=https://tinybit.com/
 If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-critical-css refresh-webhook` to grab a webhook you can ping. Because the webhook queues a one-time cron job, we'd recommend using some alternate WP Cron system to avoid timeout issues.
 
 
-== Changelog ==
+## Changelog ##
 
-= 0.1.0 =
+### 0.1.0 ###
 * Initial release.
 
