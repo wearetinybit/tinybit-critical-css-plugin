@@ -1,5 +1,5 @@
 === TinyBit Critical CSS ===
-Contributors: danielbachhuber
+Contributors: danielbachhuber, tinybit
 Tags: performance
 Requires at least: 4.5
 Tested up to: 5.8.2
@@ -17,7 +17,7 @@ The TinyBit Critical CSS plugin works with [tinybit-critical-css-server](https:/
 Here's how the plugin works:
 
 1. Critical CSS generation process is triggered by WP-CLI or the refresh webhook.
-2. Plugin renders a given page. The HTML and CSS are sent to tinybit-critical-css-server.
+2. Plugin renders a given WordPress page. The HTML and CSS of the page are sent to tinybit-critical-css-server.
 3. When tinybit-critical-css-server returns a successful response, plugin stores critical CSS to the filesystem.
 4. If the critical CSS exists for a given request, the critical CSS is included inline and the stylesheet is deferred.
 
@@ -25,13 +25,15 @@ Et voila! You have inline critical CSS.
 
 == Installation ==
 
-First, you'll need to make sure you have a working installation of [tinybit-critical-css-server](https://github.com/pinchofyum/tinybit-critical-css-server). Do that first if you haven't already.
+First, you'll need a working installation of [tinybit-critical-css-server](https://github.com/pinchofyum/tinybit-critical-css-server). Get that running if you haven't already.
 
-Once the server is running, add a `TINYBIT_CRITICAL_CSS_SERVER` constant to your preferred place for constants:
+Once the server is running, add a `TINYBIT_CRITICAL_CSS_SERVER` constant to your preferred location:
 
 ```
 define( 'TINYBIT_CRITICAL_CSS_SERVER', 'http://localhost:8080' );
 ```
+
+This constant tells the plugin where to send requests.
 
 Next, filter `tinybit_critical_css_pages` to define the pages you'd like to generate critical CSS for:
 
@@ -55,13 +57,13 @@ add_filter(
 
 In this particular example:
 
-* `handle` is the name of the script handle.
-* `source` is the path of the source CSS file.
-* `critical` is the path where the critical CSS will be written.
-* `when` is the context you'd like the critical CSS file to be used (so you can use it on more than one page).
+* `handle` is the name of the script handle (i.e. the first argument to `wp_enqueue_script()`).
+* `source` is the file path of the source CSS file.
+* `critical` is the file path where the critical CSS will be written.
+* `when` is a callback for the context you'd like the critical CSS file to be used (so you can use it on more than one page).
 * `home_url( '/' )` is the page to be rendered and passed to the server as `html`.
 
-To generate critical CSS via WP-CLI, run:
+Next, to generate critical CSS via WP-CLI, run:
 
 ```
 wp tinybit-critical-css generate --url=https://tinybit.com/
