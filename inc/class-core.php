@@ -226,6 +226,17 @@ class Core {
 	}
 
 	/**
+	 * Returns the rendered template.
+	 *
+	 * @return string
+	 */
+	protected static function get_rendered_template() {
+		ob_start();
+		self::load_template();
+		return ob_get_clean();
+	}
+
+	/**
 	 * Runs through the entirety of the WP bootstrap process
 	 */
 	private static function load_wordpress_with_template() {
@@ -238,17 +249,6 @@ class Core {
 		}
 
 		return self::get_rendered_template();
-	}
-
-	/**
-	 * Returns the rendered template.
-	 *
-	 * @return string
-	 */
-	protected static function get_rendered_template() {
-		ob_start();
-		self::load_template();
-		return ob_get_clean();
 	}
 
 	/**
