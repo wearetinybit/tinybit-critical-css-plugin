@@ -65,7 +65,7 @@ class Core {
 			return isset( $assoc_args[ $flag ] ) ? $assoc_args[ $flag ] : $default;
 		};
 
-		$f              = function( $key ) use ( $url_parts, $get_flag_value ) {
+		$f = function( $key ) use ( $url_parts, $get_flag_value ) {
 			return $get_flag_value( $url_parts, $key, '' );
 		};
 
