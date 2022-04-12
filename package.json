@@ -10,7 +10,7 @@
     "i18n" : "grunt i18n"
   },
   "devDependencies": {
-    "grunt": "~1.4.1",
+    "grunt": "~1.5.2",
     "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.1.0"
   }
