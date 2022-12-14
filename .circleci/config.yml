@@ -10,7 +10,7 @@ version: 2
 jobs:
   lint:
     docker:
-      - image: circleci/php:7.2-node-browsers
+      - image: cimg/php:7.4-node
     steps:
       - checkout
       - restore_cache:
@@ -27,8 +27,8 @@ jobs:
             composer phpcs
   test-php:
     docker:
-      - image: circleci/php:7.2-node-browsers
-      - image: circleci/mariadb:10.3
+      - image: cimg/php:7.4-node
+      - image: cimg/mariadb:10.8
     environment:
       - WP_TESTS_DIR: "/tmp/wordpress-tests-lib"
       - WP_CORE_DIR: "/tmp/wordpress/"
@@ -47,10 +47,9 @@ jobs:
           command: |
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install subversion
-            sudo apt-get install mariadb-client-10.3
-            sudo docker-php-ext-install mysqli
-            sudo apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
-            sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo docker-php-ext-install gd
+            sudo apt-get install mariadb-client
+            sudo apt-get install -y libfreetype6-dev libjpeg-dev libpng-dev
+            sudo docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
       - run:
           name: "Run Tests"
           command: |
