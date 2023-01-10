@@ -3,7 +3,7 @@
     "type": "wordpress-plugin",
     "require-dev": {
         "wp-cli/dist-archive-command": "^2.0",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
         "wp-coding-standards/wpcs": "^2.0",
         "sirbrillig/phpcs-variable-analysis": "^2.5",
         "phpcompatibility/phpcompatibility-wp": "^2.0",
