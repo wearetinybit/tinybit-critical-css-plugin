@@ -10,7 +10,7 @@
         "phpunit/phpunit": "5.7.*",
         "masterminds/html5": "^2.7",
         "querypath/querypath": "^3.0",
-        "yoast/phpunit-polyfills": "^1.0"
+        "yoast/phpunit-polyfills": "^2.0"
     },
     "scripts": {
         "phpcs": "vendor/bin/phpcs",
