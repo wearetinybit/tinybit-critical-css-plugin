@@ -57,7 +57,7 @@ class Refresh_Webhook {
 				$event,
 				$args
 			);
-			$count++;
+			++$count;
 		}
 
 		status_header( 200 );
@@ -90,5 +90,4 @@ class Refresh_Webhook {
 		}
 		Core::clear_log_messages();
 	}
-
 }

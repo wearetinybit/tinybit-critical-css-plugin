@@ -53,5 +53,4 @@ class CLI {
 	public function refresh_webhook() {
 		WP_CLI::log( sprintf( home_url( Refresh_Webhook::get_path() ) ) );
 	}
-
 }

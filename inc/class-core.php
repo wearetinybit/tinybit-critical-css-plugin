@@ -61,11 +61,11 @@ class Core {
 
 		$url_parts = wp_parse_url( $url );
 
-		$get_flag_value = function( $assoc_args, $flag, $default = null ) {
-			return isset( $assoc_args[ $flag ] ) ? $assoc_args[ $flag ] : $default;
+		$get_flag_value = function ( $assoc_args, $flag, $default_value = null ) {
+			return isset( $assoc_args[ $flag ] ) ? $assoc_args[ $flag ] : $default_value;
 		};
 
-		$f = function( $key ) use ( $url_parts, $get_flag_value ) {
+		$f = function ( $key ) use ( $url_parts, $get_flag_value ) {
 			return $get_flag_value( $url_parts, $key, '' );
 		};
 
@@ -265,7 +265,7 @@ class Core {
 
 		$template = false;
 		// phpcs:disable Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-		// phpcs:disable WordPress.CodeAnalysis.AssignmentInCondition.Found
+		// phpcs:disable Generic.CodeAnalysis.AssignmentInCondition.Found
 		if ( is_404() && $template = get_404_template() ) :
 		elseif ( is_search() && $template = get_search_template() ) :
 		elseif ( is_front_page() && $template = get_front_page_template() ) :
@@ -308,7 +308,7 @@ class Core {
 				}
 				$included_header = true;
 			}
-			include( $template );
+			include $template;
 			if ( false !== stripos( $template_contents, 'get_footer();' ) ) {
 				if ( ! isset( self::$rendered_footer ) ) {
 					// get_footer() will render the first time but not subsequent.
@@ -326,7 +326,7 @@ class Core {
 			}
 		}
 		// phpcs:enable Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-		// phpcs:enable WordPress.CodeAnalysis.AssignmentInCondition.Found
+		// phpcs:enable Generic.CodeAnalysis.AssignmentInCondition.Found
 
 		return;
 	}
@@ -340,5 +340,4 @@ class Core {
 	protected static function format_timestamp( $seconds ) {
 		return floor( $seconds / 3600 ) . gmdate( ':i:s', $seconds % 3600 );
 	}
-
 }
