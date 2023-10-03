@@ -10,46 +10,51 @@ version: 2
 jobs:
   lint:
     docker:
-      - image: cimg/php:7.4-node
+      - image: cimg/php:8.2-node
     steps:
+      - run: |
+          php --version
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "composer.lock" }}
+            - &composer-cache composer-deps-{{ checksum "composer.lock" }}
+            - composer-deps-
       - run: composer install -n --prefer-dist
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.lock" }}
+          key: *composer-cache
           paths:
             - vendor
       - run:
-          name: "Run Lint"
+          name: "Run PHP Lint"
           command: |
             composer phpcs
   test-php:
     docker:
-      - image: cimg/php:7.4-node
-      - image: cimg/mariadb:10.8
+      - image: cimg/php:8.2-node
+      - image: cimg/mysql:8.0
     environment:
       - WP_TESTS_DIR: "/tmp/wordpress-tests-lib"
       - WP_CORE_DIR: "/tmp/wordpress/"
     steps:
+      - run: |
+          php --version
+          node --version
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "composer.lock" }}
+            - &composer-cache composer-deps-{{ checksum "composer.lock" }}
+            - composer-deps-
       - run: composer install -n --prefer-dist
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.lock" }}
+          key: *composer-cache
           paths:
             - vendor
       - run:
           name: "Install Extras"
           command: |
-            sudo apt-get update --allow-releaseinfo-change
+            sudo apt-get update
             sudo apt-get install subversion
-            sudo apt-get install mariadb-client
-            sudo apt-get install -y libfreetype6-dev libjpeg-dev libpng-dev
-            sudo docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+            sudo apt-get install mysql-client
       - run:
           name: "Run Tests"
           command: |
