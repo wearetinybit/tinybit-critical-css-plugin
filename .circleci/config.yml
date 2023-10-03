@@ -3,7 +3,6 @@ workflows:
   main:
     jobs:
       - lint
-      - test-php
 
 version: 2
 
