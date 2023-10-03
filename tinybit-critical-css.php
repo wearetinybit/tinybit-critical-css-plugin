@@ -16,22 +16,21 @@
  * Register the class autoloader
  */
 spl_autoload_register(
-	function( $class ) {
-		$class = ltrim( $class, '\\' );
-		if ( 0 !== stripos( $class, 'TinyBit_Critical_Css\\' ) ) {
+	function ( $class_name ) {
+		$class_name = ltrim( $class_name, '\\' );
+		if ( 0 !== stripos( $class_name, 'TinyBit_Critical_Css\\' ) ) {
 			return;
 		}
 
-		$parts = explode( '\\', $class );
+		$parts = explode( '\\', $class_name );
 		array_shift( $parts ); // Don't need "TinyBit_Critical_Css".
 		$last    = array_pop( $parts ); // File should be 'class-[...].php'.
 		$last    = 'class-' . $last . '.php';
 		$parts[] = $last;
-		$file    = dirname( __FILE__ ) . '/inc/' . str_replace( '_', '-', strtolower( implode( '/', $parts ) ) );
+		$file    = __DIR__ . '/inc/' . str_replace( '_', '-', strtolower( implode( '/', $parts ) ) );
 		if ( file_exists( $file ) ) {
 			require $file;
 		}
-
 	}
 );
 

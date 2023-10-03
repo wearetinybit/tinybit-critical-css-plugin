@@ -41,5 +41,4 @@ class Assets {
 		}
 		return $tag;
 	}
-
 }
