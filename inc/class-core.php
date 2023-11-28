@@ -111,7 +111,13 @@ class Core {
 
 		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 
-		$output = self::load_wordpress_with_template();
+		/**
+		 * Filter the HTML output to be used for critical CSS.
+		 *
+		 * @param string $output HTML output.
+		 * @param string $url URL to generate critical CSS for.
+		 */
+		$output = apply_filters( 'tinybit_critical_css_html', self::load_wordpress_with_template(), $url );
 
 		$css = file_get_contents( $config['source'] );
 
