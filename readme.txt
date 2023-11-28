@@ -2,9 +2,9 @@
 Contributors: danielbachhuber, tinybit
 Tags: performance
 Requires at least: 4.5
-Tested up to: 5.8.2
-Requires PHP: 5.6
-Stable tag: 0.1.0
+Tested up to: 6.4
+Requires PHP: 7.4
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,9 @@ If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-crit
 
 == Changelog ==
 
+= 0.1.1 =
+
+* Add filter to generated HTML for modification before critical CSS is determined.
+
 = 0.1.0 =
 * Initial release.
-

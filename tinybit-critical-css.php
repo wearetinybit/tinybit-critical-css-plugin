@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:     TinyBit Critical CSS
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
+ * Plugin URI:      https://github.com/wearetinybit/tinybit-critical-css-plugin
+ * Description:     Works with tinybit-critical-css-server to generate and serve inline critical CSS.
  * Author:          TinyBit
  * Author URI:      https://tinybit.com
  * Text Domain:     tinybit-critical-css
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         0.1.1
  *
  * @package         Tinybit_Critical_Css
  */
