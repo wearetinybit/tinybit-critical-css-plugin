@@ -156,6 +156,55 @@
             "time": "2022-12-30T00:15:36+00:00"
         },
         {
+            "name": "inmarelibero/gitignore-checker",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inmarelibero/gitignore-checker.git",
+                "reference": "a489e819486216a7f4d55c708a4dd7e797166215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inmarelibero/gitignore-checker/zipball/a489e819486216a7f4d55c708a4dd7e797166215",
+                "reference": "a489e819486216a7f4d55c708a4dd7e797166215",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Inmarelibero\\GitIgnoreChecker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuele Gaspari",
+                    "email": "inmarelibero@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP library to check if a path is ignored by GIT",
+            "keywords": [
+                "git",
+                "gitignore",
+                "vcs"
+            ],
+            "support": {
+                "issues": "https://github.com/inmarelibero/gitignore-checker/issues",
+                "source": "https://github.com/inmarelibero/gitignore-checker/tree/1.0.3"
+            },
+            "time": "2023-09-26T09:20:54+00:00"
+        },
+        {
             "name": "mustache/mustache",
             "version": "v2.14.2",
             "source": {
@@ -2348,16 +2397,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.5.2",
+            "version": "v2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
+                "reference": "80d075412b557d41002320b96a096ca65aa2c98d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
-                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/80d075412b557d41002320b96a096ca65aa2c98d",
+                "reference": "80d075412b557d41002320b96a096ca65aa2c98d",
                 "shasum": ""
             },
             "require": {
@@ -2395,7 +2444,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.2"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.3"
             },
             "funding": [
                 {
@@ -2411,20 +2460,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-02T09:53:40+00:00"
+            "time": "2023-01-24T14:02:46+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v5.4.27",
+            "version": "v5.4.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "ff4bce3c33451e7ec778070e45bd23f74214cd5d"
+                "reference": "abe6d6f77d9465fed3cd2d029b29d03b56b56435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/ff4bce3c33451e7ec778070e45bd23f74214cd5d",
-                "reference": "ff4bce3c33451e7ec778070e45bd23f74214cd5d",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/abe6d6f77d9465fed3cd2d029b29d03b56b56435",
+                "reference": "abe6d6f77d9465fed3cd2d029b29d03b56b56435",
                 "shasum": ""
             },
             "require": {
@@ -2458,7 +2507,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.4.27"
+                "source": "https://github.com/symfony/finder/tree/v5.4.35"
             },
             "funding": [
                 {
@@ -2474,20 +2523,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-31T08:02:31+00:00"
+            "time": "2024-01-23T13:51:25+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5"
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
                 "shasum": ""
             },
             "require": {
@@ -2495,9 +2544,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -2541,7 +2587,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -2557,7 +2603,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2611,27 +2657,27 @@
         },
         {
             "name": "wp-cli/dist-archive-command",
-            "version": "v2.0.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/dist-archive-command.git",
-                "reference": "ede13cd4b8084f7861290ac4fcdda7f9866efe09"
+                "reference": "e226f7d4bcd4d7db0462a3644228b77d2ad5a85c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/dist-archive-command/zipball/ede13cd4b8084f7861290ac4fcdda7f9866efe09",
-                "reference": "ede13cd4b8084f7861290ac4fcdda7f9866efe09",
+                "url": "https://api.github.com/repos/wp-cli/dist-archive-command/zipball/e226f7d4bcd4d7db0462a3644228b77d2ad5a85c",
+                "reference": "e226f7d4bcd4d7db0462a3644228b77d2ad5a85c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
+                "inmarelibero/gitignore-checker": "^1.0.2",
+                "php": ">=7.4",
                 "wp-cli/wp-cli": "^2"
             },
             "require-dev": {
-                "behat/behat": "~2.5",
                 "wp-cli/extension-command": "^2",
                 "wp-cli/scaffold-command": "^2",
-                "wp-cli/wp-cli-tests": "^2.1"
+                "wp-cli/wp-cli-tests": "^4"
             },
             "type": "wp-cli-package",
             "extra": {
@@ -2640,7 +2686,7 @@
                 ],
                 "readme": {
                     "shields": [
-                        "[![CircleCI](https://circleci.com/gh/wp-cli/dist-archive-command/tree/master.svg?style=svg)](https://circleci.com/gh/wp-cli/dist-archive-command/tree/master)"
+                        "[![Testing](https://github.com/wp-cli/dist-archive-command/actions/workflows/testing.yml/badge.svg)](https://github.com/wp-cli/dist-archive-command/actions/workflows/testing.yml)"
                     ]
                 }
             },
@@ -2648,9 +2694,9 @@
                 "files": [
                     "dist-archive-command.php"
                 ],
-                "psr-4": {
-                    "": "src/"
-                }
+                "classmap": [
+                    "src/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2664,12 +2710,12 @@
                 }
             ],
             "description": "Create a distribution .zip or .tar.gz based on a plugin or theme's .distignore file.",
-            "homepage": "https://runcommand.io/wp/dist-archive/",
+            "homepage": "https://github.com/wp-cli/dist-archive-command/",
             "support": {
                 "issues": "https://github.com/wp-cli/dist-archive-command/issues",
-                "source": "https://github.com/wp-cli/dist-archive-command/tree/v2.0.1"
+                "source": "https://github.com/wp-cli/dist-archive-command/tree/v3.0.0"
             },
-            "time": "2020-06-02T00:16:00+00:00"
+            "time": "2023-12-18T14:28:49+00:00"
         },
         {
             "name": "wp-cli/mustangostang-spyc",
@@ -2724,16 +2770,16 @@
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.11.21",
+            "version": "v0.11.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "b3457a8d60cd0b1c48cab76ad95df136d266f0b6"
+                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/b3457a8d60cd0b1c48cab76ad95df136d266f0b6",
-                "reference": "b3457a8d60cd0b1c48cab76ad95df136d266f0b6",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/a6bb94664ca36d0962f9c2ff25591c315a550c51",
+                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51",
                 "shasum": ""
             },
             "require": {
@@ -2781,22 +2827,22 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.11.21"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.11.22"
             },
-            "time": "2023-09-29T15:28:10+00:00"
+            "time": "2023-12-03T19:25:05+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "8a3befba2d947fbf5cc6d1941edf2dd99da4d4b7"
+                "reference": "a339dca576df73c31af4b4d8054efc2dab9a0685"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/8a3befba2d947fbf5cc6d1941edf2dd99da4d4b7",
-                "reference": "8a3befba2d947fbf5cc6d1941edf2dd99da4d4b7",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/a339dca576df73c31af4b4d8054efc2dab9a0685",
+                "reference": "a339dca576df73c31af4b4d8054efc2dab9a0685",
                 "shasum": ""
             },
             "require": {
@@ -2826,7 +2872,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.9.x-dev"
+                    "dev-main": "2.10.x-dev"
                 }
             },
             "autoload": {
@@ -2853,7 +2899,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2023-10-25T09:06:37+00:00"
+            "time": "2024-02-08T16:52:43+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
