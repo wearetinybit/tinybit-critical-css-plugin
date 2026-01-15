@@ -1,13 +1,28 @@
 {
     "name": "pinchofyum/tinybit-critical-css",
     "type": "wordpress-plugin",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "phpcompatibility/php-compatibility",
+                "type": "phpcodesniffer-standard",
+                "version": "9.99.9",
+                "source": {
+                    "url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
+                    "type": "git",
+                    "reference": "9f7142356b5674164a6f6dbe12a7a1bcc632db21"
+                }
+            }
+        }
+    ],
     "require-dev": {
         "wp-cli/dist-archive-command": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "*",
         "wp-coding-standards/wpcs": "*",
         "sirbrillig/phpcs-variable-analysis": "*",
         "phpcompatibility/phpcompatibility-wp": "*",
-		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99",
+        "phpcompatibility/php-compatibility": "9.99.9",
         "phpunit/phpunit": "^9",
         "yoast/phpunit-polyfills": "*"
     },
@@ -20,8 +35,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
-		"platform": {
-			"php": "8.0"
-		}
+        "platform": {
+            "php": "8.0"
+        }
     }
 }
