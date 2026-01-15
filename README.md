@@ -2,9 +2,9 @@
 **Contributors:** [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [tinybit](https://profiles.wordpress.org/tinybit/)
 **Tags:** performance
 **Requires at least:** 4.5
-**Tested up to:** 6.4
+**Tested up to:** 6.9
 **Requires PHP:** 7.4
-**Stable tag:** 0.1.1
+**Stable tag:** 0.1.2
 **License:** GPLv2 or later
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-crit
 
 
 ## Changelog ##
+
+### 0.1.2 ###
+
+* Add hook to allow 3rd party code to initiate critical CSS generation.
 
 ### 0.1.1 ###
 
