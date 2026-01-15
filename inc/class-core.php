@@ -43,6 +43,25 @@ class Core {
 	private static $log_messages = '';
 
 	/**
+	 * Schedules generation of critical CSS for all configured pages.
+	 */
+	public static function schedule_generate_critical_css() {
+		$pages = Core::get_page_configs();
+		foreach ( $pages as $url => $config ) {
+			$event = 'tinybit_generate_critical_css';
+			$args  = [ 'url' => $url ];
+			if ( wp_next_scheduled( $event, $args ) ) {
+				continue;
+			}
+			wp_schedule_single_event(
+				time(),
+				$event,
+				$args
+			);
+		}
+	}
+
+	/**
 	 * Generates the critical CSS for a given URL.
 	 *
 	 * @param string $url URL to generate critical CSS for.

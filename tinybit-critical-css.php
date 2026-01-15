@@ -52,6 +52,17 @@ add_action(
 	)
 );
 
+/**
+ * Allow 3rd party code to schedule critical CSS generation.
+ */
+add_action(
+	'tinybit_schedule_generate_critical_css',
+	array(
+		'TinyBit_Critical_Css\Core',
+		'schedule_generate_critical_css',
+	)
+);
+
 add_action(
 	'tinybit_generate_critical_css',
 	array(
