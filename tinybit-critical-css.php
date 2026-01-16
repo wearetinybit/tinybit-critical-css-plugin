@@ -7,7 +7,7 @@
  * Author URI:      https://tinybit.com
  * Text Domain:     tinybit-critical-css
  * Domain Path:     /languages
- * Version:         0.1.2
+ * Version:         0.1.3
  *
  * @package         Tinybit_Critical_Css
  */
