@@ -100,15 +100,11 @@ class Core {
 			);
 		}
 
-		if ( ! self::use_database_storage() ) {
-			if ( ! is_dir( dirname( $config['critical'] ) ) ) {
-				if ( ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
-					return new WP_Error(
-						'destination-error',
-						sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
-					);
-				}
-			}
+		if ( ! self::use_database_storage() && ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
+			return new WP_Error(
+				'destination-error',
+				sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
+			);
 		}
 
 		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
