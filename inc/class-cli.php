@@ -33,13 +33,22 @@ class CLI {
 	}
 
 	/**
-	 * Clears all critical CSS files.
+	 * Clears all critical CSS files or database options.
 	 */
 	public function clear() {
-		foreach ( Core::get_page_configs() as $page ) {
-			if ( file_exists( $page['critical'] ) ) {
-				unlink( $page['critical'] );
-				WP_CLI::log( sprintf( 'Deleted critical css at %s', str_replace( ABSPATH, '', $page['critical'] ) ) );
+		if ( Core::use_database_storage() ) {
+			foreach ( Core::get_page_configs() as $url => $page ) {
+				$option_name = Core::get_option_name_for_url( $url );
+				if ( delete_option( $option_name ) ) {
+					WP_CLI::log( sprintf( 'Deleted critical css from database option %s', $option_name ) );
+				}
+			}
+		} else {
+			foreach ( Core::get_page_configs() as $page ) {
+				if ( ! empty( $page['critical'] ) && file_exists( $page['critical'] ) ) {
+					unlink( $page['critical'] );
+					WP_CLI::log( sprintf( 'Deleted critical css at %s', str_replace( ABSPATH, '', $page['critical'] ) ) );
+				}
 			}
 		}
 		WP_CLI::success( 'Cleared critical CSS' );
