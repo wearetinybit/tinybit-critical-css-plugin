@@ -119,13 +119,11 @@ class Core {
 			);
 		}
 
-		if ( ! is_dir( dirname( $config['critical'] ) ) ) {
-			if ( ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
-				return new WP_Error(
-					'destination-error',
-					sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
-				);
-			}
+		if ( ! self::use_database_storage() && ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
+			return new WP_Error(
+				'destination-error',
+				sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
+			);
 		}
 
 		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
@@ -165,9 +163,15 @@ class Core {
 		if ( 200 === $code ) {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( ! empty( $body['css'] ) ) {
-				file_put_contents( $config['critical'], $body['css'] );
 				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
-				self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
+				if ( self::use_database_storage() ) {
+					$option_name = self::get_option_name_for_url( $url );
+					update_option( $option_name, $body['css'], false );
+					self::log( sprintf( 'Saved critical css (%skb) to database option %s [%s]', $critical_size, $option_name, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
+				} else {
+					file_put_contents( $config['critical'], $body['css'] );
+					self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
+				}
 				if ( $critical_size >= 14 ) {
 					return new WP_Error(
 						'size-exceeded',
@@ -220,6 +224,25 @@ class Core {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Checks if database storage is enabled for critical CSS.
+	 *
+	 * @return bool
+	 */
+	public static function use_database_storage() {
+		return apply_filters( 'tinybit_critical_css_use_database', false );
+	}
+
+	/**
+	 * Gets the option name for storing critical CSS for a given URL.
+	 *
+	 * @param string $url URL to generate option name for.
+	 * @return string
+	 */
+	public static function get_option_name_for_url( $url ) {
+		return 'tinybit_critical_css_' . md5( $url );
 	}
 
 	/**
