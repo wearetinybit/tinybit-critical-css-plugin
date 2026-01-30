@@ -44,20 +44,16 @@ class Refresh_Webhook {
 			|| self::get_path() !== $wp->request ) {
 			return;
 		}
-		$count = 0;
-		$pages = Core::get_page_configs();
-		foreach ( $pages as $url => $config ) {
-			$event = 'tinybit_generate_critical_css';
-			$args  = [ 'url' => $url ];
-			if ( wp_next_scheduled( $event, $args ) ) {
-				continue;
-			}
-			wp_schedule_single_event(
-				time(),
-				$event,
-				$args
-			);
-			++$count;
+
+		$pages         = Core::get_page_configs();
+		$urls          = array_keys( $pages );
+		$existing      = Core::get_queue();
+		$urls_to_add   = array_diff( $urls, $existing );
+		$count         = count( $urls_to_add );
+
+		if ( $count > 0 ) {
+			Core::add_to_queue( $urls_to_add );
+			Core::schedule_queue_processing();
 		}
 
 		status_header( 200 );
