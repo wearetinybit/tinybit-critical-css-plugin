@@ -64,10 +64,10 @@ add_action(
 );
 
 add_action(
-	'tinybit_generate_critical_css',
+	'tinybit_process_critical_css_queue',
 	array(
-		'TinyBit_Critical_Css\Refresh_Webhook',
-		'handle_tinybit_generate_critical_css',
+		'TinyBit_Critical_Css\Core',
+		'process_queue',
 	)
 );
 
