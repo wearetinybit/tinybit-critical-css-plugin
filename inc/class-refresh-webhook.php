@@ -45,11 +45,11 @@ class Refresh_Webhook {
 			return;
 		}
 
-		$pages         = Core::get_page_configs();
-		$urls          = array_keys( $pages );
-		$existing      = Core::get_queue();
-		$urls_to_add   = array_diff( $urls, $existing );
-		$count         = count( $urls_to_add );
+		$pages       = Core::get_page_configs();
+		$urls        = array_keys( $pages );
+		$existing    = Core::get_queue();
+		$urls_to_add = array_diff( $urls, $existing );
+		$count       = count( $urls_to_add );
 
 		if ( $count > 0 ) {
 			Core::add_to_queue( $urls_to_add );
