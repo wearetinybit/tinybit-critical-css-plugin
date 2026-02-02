@@ -71,14 +71,6 @@ add_action(
 	)
 );
 
-add_action(
-	'tinybit_process_critical_css_queue',
-	array(
-		'TinyBit_Critical_Css\Core',
-		'process_queue',
-	)
-);
-
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'tinybit-critical-css', 'TinyBit_Critical_Css\CLI' );
 }
