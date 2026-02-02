@@ -43,115 +43,31 @@ class Core {
 	private static $log_messages = '';
 
 	/**
-	 * Option name for the critical CSS generation queue.
-	 *
-	 * @var string
-	 */
-	const QUEUE_OPTION = 'tinybit_critical_css_queue';
-
-	/**
-	 * Cron event name for processing the queue.
-	 *
-	 * @var string
-	 */
-	const QUEUE_CRON_EVENT = 'tinybit_process_critical_css_queue';
-
-	/**
 	 * Schedules generation of critical CSS for all configured pages.
-	 *
-	 * Adds all pages to a queue and schedules a single cron event to process
-	 * them one at a time.
 	 */
 	public static function schedule_generate_critical_css() {
-		$pages = self::get_page_configs();
-		$urls  = array_keys( $pages );
+		$pages = Core::get_page_configs();
+		$count = 0;
 
-		self::add_to_queue( $urls );
-		self::schedule_queue_processing();
-	}
+		/**
+		 * Filter the interval between scheduled critical CSS generation jobs.
+		 *
+		 * @param integer $interval Interval in seconds. Default 30 seconds.
+		 */
+		$interval = apply_filters( 'tinybit_critical_css_generation_interval', 30 );
 
-	/**
-	 * Gets the current queue of URLs to process.
-	 *
-	 * @return array
-	 */
-	public static function get_queue() {
-		return get_option( self::QUEUE_OPTION, [] );
-	}
-
-	/**
-	 * Saves the queue to the database.
-	 *
-	 * @param array $queue Array of URLs to process.
-	 */
-	public static function set_queue( $queue ) {
-		update_option( self::QUEUE_OPTION, $queue, false );
-	}
-
-	/**
-	 * Adds URLs to the queue.
-	 *
-	 * @param array $urls Array of URLs to add.
-	 */
-	public static function add_to_queue( $urls ) {
-		$queue = self::get_queue();
-		foreach ( $urls as $url ) {
-			if ( ! in_array( $url, $queue, true ) ) {
-				$queue[] = $url;
+		foreach ( $pages as $url => $config ) {
+			$event = 'tinybit_generate_critical_css';
+			$args  = [ 'url' => $url ];
+			if ( wp_next_scheduled( $event, $args ) ) {
+				continue;
 			}
-		}
-		self::set_queue( $queue );
-	}
-
-	/**
-	 * Schedules the queue processing cron event if not already scheduled.
-	 */
-	public static function schedule_queue_processing() {
-		if ( ! wp_next_scheduled( self::QUEUE_CRON_EVENT ) ) {
-			wp_schedule_single_event( time(), self::QUEUE_CRON_EVENT );
-		}
-	}
-
-	/**
-	 * Processes the next item in the queue.
-	 *
-	 * Generates critical CSS for one URL, then schedules the next run
-	 * if there are more URLs in the queue.
-	 */
-	public static function process_queue() {
-		$queue = self::get_queue();
-
-		if ( empty( $queue ) ) {
-			return;
-		}
-
-		// Get the next URL to process.
-		$url = array_shift( $queue );
-		self::set_queue( $queue );
-
-		// Generate critical CSS for this URL.
-		$ret   = self::generate( $url );
-		$email = apply_filters( 'tinybit_critical_css_cron_email', '', $ret );
-		if ( $email ) {
-			$timestamp = gmdate( 'Y-m-d H:i:s' );
-			$base      = is_wp_error( $ret ) ? 'Error generating critical CSS for %s [%s]' : 'Successfully generated critical css for %s [%s]';
-			$subject   = sprintf( $base, $url, $timestamp );
-			if ( is_wp_error( $ret ) ) {
-				$body = self::get_log_messages() . PHP_EOL . $ret->get_error_message();
-			} else {
-				$body = self::get_log_messages();
-			}
-			wp_mail(
-				$email,
-				$subject,
-				$body
+			wp_schedule_single_event(
+				time() + ( $count * $interval ),
+				$event,
+				$args
 			);
-		}
-		self::clear_log_messages();
-
-		// Schedule the next run if there are more URLs.
-		if ( ! empty( $queue ) ) {
-			wp_schedule_single_event( time(), self::QUEUE_CRON_EVENT );
+			++$count;
 		}
 	}
 
