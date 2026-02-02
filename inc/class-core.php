@@ -47,6 +47,15 @@ class Core {
 	 */
 	public static function schedule_generate_critical_css() {
 		$pages = Core::get_page_configs();
+		$count = 0;
+
+		/**
+		 * Filter the interval between scheduled critical CSS generation jobs.
+		 *
+		 * @param integer $interval Interval in seconds. Default 30 seconds.
+		 */
+		$interval = apply_filters( 'tinybit_critical_css_generation_interval', 30 );
+
 		foreach ( $pages as $url => $config ) {
 			$event = 'tinybit_generate_critical_css';
 			$args  = [ 'url' => $url ];
@@ -54,10 +63,11 @@ class Core {
 				continue;
 			}
 			wp_schedule_single_event(
-				time(),
+				time() + ( $count * $interval ),
 				$event,
 				$args
 			);
+			++$count;
 		}
 	}
 
