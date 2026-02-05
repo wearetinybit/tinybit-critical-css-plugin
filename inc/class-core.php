@@ -147,7 +147,7 @@ class Core {
 				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
 				if ( self::use_database_storage() ) {
 					$option_name = self::get_option_name_for_url( $url );
-					update_option( $option_name, $body['css'], false );
+					update_option( $option_name, $body['css'] );
 					self::log( sprintf( 'Saved critical css (%skb) to database option %s [%s]', $critical_size, $option_name, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 				} else {
 					file_put_contents( $config['critical'], $body['css'] );
