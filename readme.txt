@@ -2,9 +2,9 @@
 Contributors: danielbachhuber, tinybit
 Tags: performance
 Requires at least: 4.5
-Tested up to: 6.9
+Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 0.1.6
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,27 +73,6 @@ If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-crit
 
 
 == Changelog ==
-
-= 0.1.6 =
-
-* Revert to previous cron system, add intervals.
-* Add Slack notification support.
-
-= 0.1.5 =
-
-* Bump version.
-
-= 0.1.4 =
-
-* Improve queue processing to avoid stampeding the server.
-
-= 0.1.3 =
-
-* Add support for DB storage of critical CSS.
-
-= 0.1.2 =
-
-* Add hook to allow 3rd party code to initiate critical CSS generation.
 
 = 0.1.1 =
 

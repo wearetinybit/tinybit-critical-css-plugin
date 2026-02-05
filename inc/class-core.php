@@ -43,35 +43,6 @@ class Core {
 	private static $log_messages = '';
 
 	/**
-	 * Schedules generation of critical CSS for all configured pages.
-	 */
-	public static function schedule_generate_critical_css() {
-		$pages = Core::get_page_configs();
-		$count = 0;
-
-		/**
-		 * Filter the interval between scheduled critical CSS generation jobs.
-		 *
-		 * @param integer $interval Interval in seconds. Default 30 seconds.
-		 */
-		$interval = apply_filters( 'tinybit_critical_css_generation_interval', 30 );
-
-		foreach ( $pages as $url => $config ) {
-			$event = 'tinybit_generate_critical_css';
-			$args  = [ 'url' => $url ];
-			if ( wp_next_scheduled( $event, $args ) ) {
-				continue;
-			}
-			wp_schedule_single_event(
-				time() + ( $count * $interval ),
-				$event,
-				$args
-			);
-			++$count;
-		}
-	}
-
-	/**
 	 * Generates the critical CSS for a given URL.
 	 *
 	 * @param string $url URL to generate critical CSS for.
@@ -129,11 +100,13 @@ class Core {
 			);
 		}
 
-		if ( ! self::use_database_storage() && ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
-			return new WP_Error(
-				'destination-error',
-				sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
-			);
+		if ( ! is_dir( dirname( $config['critical'] ) ) ) {
+			if ( ! wp_mkdir_p( dirname( $config['critical'] ) ) ) {
+				return new WP_Error(
+					'destination-error',
+					sprintf( 'Unable to create directory for critical CSS: %s', str_replace( ABSPATH, '', $config['critical'] ) )
+				);
+			}
 		}
 
 		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
@@ -173,15 +146,9 @@ class Core {
 		if ( 200 === $code ) {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( ! empty( $body['css'] ) ) {
+				file_put_contents( $config['critical'], $body['css'] );
 				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
-				if ( self::use_database_storage() ) {
-					$option_name = self::get_option_name_for_url( $url );
-					update_option( $option_name, $body['css'], false );
-					self::log( sprintf( 'Saved critical css (%skb) to database option %s [%s]', $critical_size, $option_name, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
-				} else {
-					file_put_contents( $config['critical'], $body['css'] );
-					self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
-				}
+				self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 				if ( $critical_size >= 14 ) {
 					return new WP_Error(
 						'size-exceeded',
@@ -234,25 +201,6 @@ class Core {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Checks if database storage is enabled for critical CSS.
-	 *
-	 * @return bool
-	 */
-	public static function use_database_storage() {
-		return apply_filters( 'tinybit_critical_css_use_database', false );
-	}
-
-	/**
-	 * Gets the option name for storing critical CSS for a given URL.
-	 *
-	 * @param string $url URL to generate option name for.
-	 * @return string
-	 */
-	public static function get_option_name_for_url( $url ) {
-		return 'tinybit_critical_css_' . md5( $url );
 	}
 
 	/**

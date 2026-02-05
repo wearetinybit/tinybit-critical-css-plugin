@@ -7,7 +7,7 @@
  * Author URI:      https://tinybit.com
  * Text Domain:     tinybit-critical-css
  * Domain Path:     /languages
- * Version:         0.1.6
+ * Version:         0.2.0
  *
  * @package         Tinybit_Critical_Css
  */
@@ -49,17 +49,6 @@ add_action(
 	array(
 		'TinyBit_Critical_Css\Refresh_Webhook',
 		'action_template_redirect',
-	)
-);
-
-/**
- * Allow 3rd party code to schedule critical CSS generation.
- */
-add_action(
-	'tinybit_schedule_generate_critical_css',
-	array(
-		'TinyBit_Critical_Css\Core',
-		'schedule_generate_critical_css',
 	)
 );
 
