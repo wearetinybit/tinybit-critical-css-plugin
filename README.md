@@ -4,7 +4,7 @@
 **Requires at least:** 4.5
 **Tested up to:** 6.9
 **Requires PHP:** 7.4
-**Stable tag:** 0.2.0
+**Stable tag:** 0.2.1
 **License:** GPLv2 or later
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-crit
 
 
 ## Changelog ##
+
+### 0.2.1 ###
+
+* Add option to store critical CSS in database vs filesystem.
 
 ### 0.2.0 ###
 
