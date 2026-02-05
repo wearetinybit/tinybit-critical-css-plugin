@@ -1,7 +1,7 @@
 
 {
   "name": "tinybit-critical-css",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": "Gruntfile.js",
   "author": "YOUR NAME HERE",
   "scripts" : {
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "grunt": "~1.6.1",
-    "grunt-wp-i18n": "~1.0.4",
+    "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.1.0"
   }
 }

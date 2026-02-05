@@ -88,57 +88,6 @@ class Refresh_Webhook {
 				$body
 			);
 		}
-
-		self::maybe_send_slack_notification( $url, $ret );
-
 		Core::clear_log_messages();
-	}
-
-	/**
-	 * Sends a Slack notification if a webhook URL is configured.
-	 *
-	 * @param string          $url URL that was processed.
-	 * @param string|WP_Error $ret Result of the critical CSS generation.
-	 */
-	private static function maybe_send_slack_notification( $url, $ret ) {
-		$webhook_url = apply_filters( 'tinybit_critical_css_slack_webhook', '' );
-		if ( ! $webhook_url ) {
-			return;
-		}
-
-		$is_error = is_wp_error( $ret );
-		$status   = $is_error ? 'Error' : 'Success';
-		$color    = $is_error ? 'danger' : 'good';
-		$title    = sprintf( 'Critical CSS %s: %s', $status, $url );
-
-		$log_messages = Core::get_log_messages();
-		$text         = $log_messages;
-		if ( $is_error ) {
-			$text .= PHP_EOL . $ret->get_error_message();
-		}
-
-		$payload = [
-			'attachments' => [
-				[
-					'fallback'  => $title,
-					'color'     => $color,
-					'title'     => $title,
-					'text'      => $text,
-					'footer'    => 'TinyBit Critical CSS',
-					'ts'        => time(),
-					'mrkdwn_in' => [ 'text' ],
-				],
-			],
-		];
-
-		wp_remote_post(
-			$webhook_url,
-			[
-				'body'     => wp_json_encode( $payload ),
-				'headers'  => [ 'Content-Type' => 'application/json' ],
-				'timeout'  => 10,
-				'blocking' => false,
-			]
-		);
 	}
 }
