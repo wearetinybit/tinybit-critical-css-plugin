@@ -4,7 +4,7 @@ Tags: performance
 Requires at least: 4.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 0.2.2
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,12 @@ If you'd like to regenerate critical CSS after each deploy, run `wp tinybit-crit
 
 
 == Changelog ==
+
+= 0.3.0 =
+
+* Do not include critical CSS in HTML to be be critical CSSed.
+* Capture new CSS and HEAD gzip sizes from critical CSS server.
+* Add hook to enable easier secondary notifications (e.g. Slack) downstream.
 
 = 0.2.2 =
 
