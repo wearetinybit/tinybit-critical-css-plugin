@@ -2750,16 +2750,16 @@
         },
         {
             "name": "wp-cli/mustangostang-spyc",
-            "version": "0.6.3",
+            "version": "0.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/spyc.git",
-                "reference": "6aa0b4da69ce9e9a2c8402dab8d43cf32c581cc7"
+                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/6aa0b4da69ce9e9a2c8402dab8d43cf32c581cc7",
-                "reference": "6aa0b4da69ce9e9a2c8402dab8d43cf32c581cc7",
+                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/30f25baaaba939caaff1f4b8c7ed998632f59fe2",
+                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2",
                 "shasum": ""
             },
             "require": {
@@ -2795,22 +2795,22 @@
             "description": "A simple YAML loader/dumper class for PHP (WP-CLI fork)",
             "homepage": "https://github.com/mustangostang/spyc/",
             "support": {
-                "source": "https://github.com/wp-cli/spyc/tree/autoload"
+                "source": "https://github.com/wp-cli/spyc/tree/0.6.6"
             },
-            "time": "2017-04-25T11:26:20+00:00"
+            "time": "2026-03-12T12:30:41+00:00"
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.12.7",
+            "version": "v0.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "5cc6ef2e93cfcd939813eb420ae23bc116d9be2a"
+                "reference": "c3d25138ce46a66647ec0dc9b17bf300338494aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/5cc6ef2e93cfcd939813eb420ae23bc116d9be2a",
-                "reference": "5cc6ef2e93cfcd939813eb420ae23bc116d9be2a",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/c3d25138ce46a66647ec0dc9b17bf300338494aa",
+                "reference": "c3d25138ce46a66647ec0dc9b17bf300338494aa",
                 "shasum": ""
             },
             "require": {
@@ -2858,9 +2858,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.7"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.9"
             },
-            "time": "2026-01-20T20:31:49+00:00"
+            "time": "2026-03-29T11:12:54+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
