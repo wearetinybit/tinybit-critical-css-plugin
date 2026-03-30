@@ -149,22 +149,27 @@ class Core {
 		}
 		if ( 200 === $code ) {
 			$body = json_decode( wp_remote_retrieve_body( $response ), true );
-			if ( ! empty( $body['css'] ) ) {
-				$critical_size = round( ( strlen( $body['css'] ) / 1000 ), 2 );
+
+			$critical_css   = isset( $body['css'] ) ? $body['css'] : '';
+			$css_gzip_size  = isset( $body['gzipSize'] ) ? (int) $body['gzipSize'] : 0;
+			$head_gzip_size = isset( $body['headGzipSize'] ) ? (int) $body['headGzipSize'] : 0;
+
+			if ( ! empty( $critical_css ) ) {
+				$critical_size = round( ( strlen( $critical_css ) / 1000 ), 2 );
 				if ( self::use_database_storage() ) {
 					$option_name = self::get_option_name_for_url( $url );
-					update_option( $option_name, $body['css'] );
+					update_option( $option_name, $critical_css );
 					self::log( sprintf( 'Saved critical css (%skb) to database option %s [%s]', $critical_size, $option_name, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 				} else {
-					file_put_contents( $config['critical'], $body['css'] );
+					file_put_contents( $config['critical'], $critical_css );
 					self::log( sprintf( 'Saved critical css (%skb) to %s [%s]', $critical_size, str_replace( ABSPATH, '', $config['critical'] ), self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 				}
-				if ( $critical_size >= 14 ) {
-					return new WP_Error(
-						'size-exceeded',
-						sprintf( 'Critical CSS size exceeds 14kb (actual %skb)', $critical_size )
-					);
-				}
+
+				return [
+					'critical_size'  => $critical_size,
+					'css_gzip_size'  => $css_gzip_size,
+					'head_gzip_size' => $head_gzip_size,
+				];
 			} else {
 				return new WP_Error(
 					'empty-response',

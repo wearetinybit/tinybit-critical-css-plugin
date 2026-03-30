@@ -73,6 +73,9 @@ class Refresh_Webhook {
 	public static function handle_tinybit_generate_critical_css( $url ) {
 		$ret   = Core::generate( $url );
 		$email = apply_filters( 'tinybit_critical_css_cron_email', '', $ret );
+
+		do_action( 'tinybit_critical_css_generated', $url, $ret );
+
 		if ( $email ) {
 			$timestamp = gmdate( 'Y-m-d H:i:s' );
 			$base      = is_wp_error( $ret ) ? 'Error generating critical CSS for %s [%s]' : 'Successfully generated critical css for %s [%s]';
