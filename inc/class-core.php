@@ -110,6 +110,12 @@ class Core {
 		self::log( sprintf( 'Rendering WordPress output for %s [%s]', $url, self::format_timestamp( microtime( true ) - self::$start_time ) ) );
 
 		/**
+		 * Do not include existing critical CSS in the HTML sent to the critical
+		 * CSS server. This allows us to measure a more accurate HEAD size.
+		 */
+		remove_filter( 'style_loader_tag', array( 'TinyBit_Critical_Css\Assets', 'filter_style_loader_tag' ), 10 );
+
+		/**
 		 * Filter the HTML output to be used for critical CSS.
 		 *
 		 * @param string $output HTML output.
